@@ -48,6 +48,7 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const showRegister = document.getElementById("showRegister");
 const showLogin = document.getElementById("showLogin");
+const forgotPasswordLink = document.getElementById("forgotPasswordLink");
 
 // Toggle between login and register
 showRegister.addEventListener("click", () => {
@@ -72,7 +73,12 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
       body: JSON.stringify({ phone, password })
     });
     const data = await res.json();
-    alert(data.message);
+    if (res.ok) {
+      alert("Login successful!");
+      // Redirect or further actions can be added here
+    } else {
+      alert(data.message);
+    }
   } catch (err) {
     alert("Server not reachable. Please try again later.");
   }
@@ -97,6 +103,24 @@ document.getElementById("registerBtn").addEventListener("click", async () => {
       registerForm.classList.add("hidden");
       loginForm.classList.remove("hidden");
     }
+  } catch (err) {
+    alert("Server not reachable. Please try again later.");
+  }
+});
+
+// Forgot Password
+forgotPasswordLink.addEventListener("click", async () => {
+  const phone = prompt("Enter your registered phone number:");
+  if (!phone) { alert("Phone number is required."); return; }
+
+  try {
+    const res = await fetch(`${backendURL}/forgot-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone })
+    });
+    const data = await res.json();
+    alert(data.message || "Password reset request sent!");
   } catch (err) {
     alert("Server not reachable. Please try again later.");
   }
