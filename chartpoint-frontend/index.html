@@ -75,7 +75,6 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     const data = await res.json();
     if (res.ok) {
       alert("Login successful!");
-      // Redirect or further actions can be added here
     } else {
       alert(data.message);
     }
@@ -108,22 +107,20 @@ document.getElementById("registerBtn").addEventListener("click", async () => {
   }
 });
 
-// Forgot Password
-forgotPasswordLink.addEventListener("click", async () => {
+// Forgot Password via WhatsApp
+forgotPasswordLink.addEventListener("click", () => {
+  const name = prompt("Enter your full name:");
   const phone = prompt("Enter your registered phone number:");
-  if (!phone) { alert("Phone number is required."); return; }
-
-  try {
-    const res = await fetch(`${backendURL}/forgot-password`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone })
-    });
-    const data = await res.json();
-    alert(data.message || "Password reset request sent!");
-  } catch (err) {
-    alert("Server not reachable. Please try again later.");
+  if (!name || !phone) {
+    alert("Both name and phone number are required.");
+    return;
   }
+
+  const message = `Hi, I forgot my password.\nName: ${name}\nPhone: ${phone}`;
+  const whatsappNumber = "918088975913"; // WhatsApp number with country code
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
 });
 </script>
 
