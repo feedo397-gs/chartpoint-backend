@@ -1,6 +1,7 @@
 # Node modules
 node_modules/
 
+<<<<<<< HEAD
 # Logs
 logs/
 *.log
@@ -23,3 +24,19 @@ build/
 *.swp
 *.swo
 .vercel
+=======
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Optional: OS files
+.DS_Store
+Thumbs.db
+
+# Optional: npm debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> ae88f8bce1663745ab761bc6dfe0b147fa36df4d
