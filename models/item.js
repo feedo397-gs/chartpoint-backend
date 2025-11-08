@@ -1,5 +1,5 @@
-// models/Item.js
-const mongoose = require("../db");
+// models/Item.js// models/Item.js
+import mongoose from "../src/db.js";
 
 const itemSchema = new mongoose.Schema({
   shopName: { type: String, required: true },
@@ -9,4 +9,4 @@ const itemSchema = new mongoose.Schema({
   imageUrl: String
 });
 
-module.exports = mongoose.model("Item", itemSchema);
+export default mongoose.models.Item || mongoose.model("Item", itemSchema);
